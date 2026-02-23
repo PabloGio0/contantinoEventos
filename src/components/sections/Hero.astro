@@ -8,9 +8,9 @@ import ByNumber from "./ByNumber.astro";
 import myHeroImage1 from "../../assets/images/hero1.jpg";
 import myHeroImage2 from "../../assets/images/hero2.jpg";
 import myHeroImage3 from "../../assets/images/hero3.jpg";
+import hero from "../../assets/videos/hero.mp4";
 import CtaButton from "../shared/CtaButton.astro";
 import ByResult from "./ByResult.astro";
-import GradiantText from "../shared/GradiantText.astro";
 
 export interface Props {
   className?: string;
@@ -19,24 +19,36 @@ export interface Props {
 const { className } = Astro.props;
 ---
 
-<section class=`relative pt-32 lg:pt-36 ${className}`>
-  <Container className={"flex flex-col lg:flex-row gap-10 lg:gap-12"}>
-    <div
-      class="relative flex flex-col items-center text-center lg:text-left lg:py-7 xl:py-8
-        lg:items-start lg:max-w-none max-w-3xl mx-auto lg:mx-0 lg:flex-1 lg:w-1/2"
-    >
-      <h1
-        class="text-3xl/tight sm:text-4xl/tight md:text-5xl/tight xl:text-6xl/tight
-              font-bold text-heading-1 text-center">
-        Producción integral para eventos en CDMX
-      </h1>
-      <Paragraph className="mt-5 ">
-        DJ profesional, audio e iluminación de alto nivel, mesas, sillas,
-        meseros y todo lo necesario para que tu evento funcione
-        de principio a fin, con un solo equipo.
-      </Paragraph>
+<section class="relative min-h-screen flex items-center overflow-hidden">
 
-      <div class="mt-8 w-full flex flex-col">
+  <!-- Imagen de fondo -->
+  <div class="absolute inset-0">
+    <!-- Video de fondo -->
+ <video
+  autoplay
+  muted
+  loop
+  playsinline
+  class="absolute inset-0 w-full h-full object-cover"
+>
+  <source src={hero} type="video/mp4" />
+</video>
+    <div class="absolute inset-0 bg-gradient-to-b from-slate-950/90 via-slate-950/80 to-slate-950/95"></div>
+  </div>
+
+  <!-- Contenido -->
+  <Container className="relative z-10 text-center max-w-4xl mx-auto">
+    <h1 class="text-4xl sm:text-5xl xl:text-6xl font-semibold text-white leading-tight">
+      Producción integral para eventos en CDMX
+    </h1>
+
+    <Paragraph className="mt-6 text-slate-300">
+      DJ profesional, audio e iluminación de alto nivel, mesas, sillas,
+      meseros y todo lo necesario para que tu evento funcione
+      de principio a fin, con un solo equipo.
+    </Paragraph>
+
+    <div class="mt-8 w-full flex flex-col">
         <div class="lg:mx-auto mb-5">
           <CtaButton />
         </div>
@@ -45,23 +57,6 @@ const { className } = Astro.props;
         </div>
       </div>
     </div>
-
-    <div
-      class="flex flex-1 lg:w-1/2 lg:h-auto relative lg:max-w-none lg:mx-0 mx-auto max-w-3xl"
-    >
-      <Image
-        src={myHeroImage3}
-        alt="Producción de eventos en CDMX"
-        class="my-class"
-        width="2350"
-        height="2359"
-        class="lg:absolute lg:w-full lg:h-full rounded-3xl object-cover lg:max-h-none max-h-96"
-      />
-
-      <!-- https://unsplash.com/photos/man-in-gray-hoodie-sitting-on-brown-wooden-chair-on-green-grass-field-during-daytime-3faX71BaNe0?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash -->
-    </div>
   </Container>
 
-  <ByNumber />
-  <!-- <ByResult /> -->
 </section>

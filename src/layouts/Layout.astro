@@ -1,6 +1,6 @@
 ---
-import '../styles/global.css';
-import '../styles/custom.css';
+import "../styles/global.css";
+import "../styles/custom.css";
 import Navbar from "./Navbar.astro";
 import Footer from "./Footer.astro";
 
@@ -17,17 +17,36 @@ const { title } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <meta
-      name="description"
-      content="Constantino Eventos & Producciones"
-    />
+    <meta name="description" content="Constantino Eventos & Producciones" />
     <title>Constantino Eventos & Producciones - {title}</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/style/custom.css" />
-  </head>
+    <script>
+      const ctaButton = document.getElementById("ctaButton");
+
+      const whatsappUrl =
+        "https://wa.me/525581657250?text=Hola,%20quiero%20cotizar%20un%20evento";
+
+      function handleCTA() {
+        const width = window.innerWidth;
+
+        // Tablet range (ej. 768px a 1024px)
+        if (width >= 768 && width <= 1024) {
+          window.location.href = "#contacto"; // tu sección formulario
+        } else {
+          window.location.href = whatsappUrl;
+        }
+      }
+
+      if (ctaButton) {
+        ctaButton.addEventListener("click", handleCTA);
+      }
+    </script></head
+  >
+
   <body class="overflow-hidden overflow-y-auto bg-body">
     <Navbar />
     <slot />
@@ -37,7 +56,7 @@ const { title } = Astro.props;
     detectSystemTheme();
 
     const switchTheme = document.querySelector(
-      "[data-switch-theme]"
+      "[data-switch-theme]",
     ) as HTMLButtonElement;
     switchTheme.addEventListener("click", (e) => {
       e.preventDefault();
@@ -87,11 +106,11 @@ const { title } = Astro.props;
   </script>
   <script>
     const toggleMenu = document.querySelector(
-      "[data-toggle-nav]"
+      "[data-toggle-nav]",
     ) as HTMLButtonElement;
     const navbar = document.querySelector("[data-navbar]") as HTMLDivElement;
     const overlayNav = document.querySelector(
-      "[data-nav-overlay]"
+      "[data-nav-overlay]",
     ) as HTMLDivElement;
     if (toggleMenu) {
       toggleMenu.addEventListener("click", (e) => {
@@ -123,5 +142,30 @@ const { title } = Astro.props;
         navbar.style.height = "0px";
       });
     }
+  </script>
+  <script>
+    const navbar = document.getElementById("navbar");
+
+    window.addEventListener("scroll", () => {
+      if (!navbar) return;
+
+      if (window.scrollY > 50) {
+        navbar.classList.add(
+          "bg-slate-950/90",
+          "backdrop-blur-md",
+          "shadow-lg",
+          "py-4",
+        );
+        navbar.classList.remove("py-6");
+      } else {
+        navbar.classList.remove(
+          "bg-slate-950/90",
+          "backdrop-blur-md",
+          "shadow-lg",
+          "py-4",
+        );
+        navbar.classList.add("py-6");
+      }
+    });
   </script>
 </html>

@@ -1,6 +1,6 @@
 ---
 export interface Props {
-  variant?: "primary" | "secondary";
+  variant: "primary";
   className?: string;
 }
 
@@ -8,9 +8,7 @@ const { variant = "primary", className } = Astro.props;
 
 const variants = {
   primary:
-    "border border-white text-white hover:bg-white hover:text-black transition-all duration-500",
-  secondary:
-    "bg-white text-black hover:bg-gray-200 transition-all duration-300",
+    "border border-white text-white hover:bg-amber-400 hover:text-black hover:border-black transition-all duration-500",
 };
 ---
 
