@@ -24,7 +24,15 @@ const { title } = Astro.props;
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/style/custom.css" />
-    <script>
+  </head>
+
+  <body class="overflow-hidden overflow-y-auto bg-body">
+    <Navbar />
+    <slot />
+    <Footer />
+  </body>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
       const ctaButton = document.getElementById("ctaButton");
 
       const whatsappUrl =
@@ -33,9 +41,8 @@ const { title } = Astro.props;
       function handleCTA() {
         const width = window.innerWidth;
 
-        // Tablet range (ej. 768px a 1024px)
         if (width >= 768 && width <= 1024) {
-          window.location.href = "#contacto"; // tu sección formulario
+          window.location.href = "#contacto";
         } else {
           window.location.href = whatsappUrl;
         }
@@ -44,14 +51,8 @@ const { title } = Astro.props;
       if (ctaButton) {
         ctaButton.addEventListener("click", handleCTA);
       }
-    </script></head
-  >
-
-  <body class="overflow-hidden overflow-y-auto bg-body">
-    <Navbar />
-    <slot />
-    <Footer />
-  </body>
+    });
+  </script>
   <script>
     detectSystemTheme();
 
@@ -69,15 +70,6 @@ const { title } = Astro.props;
       if (localAppTheme === "light") {
         changeThemeToDark();
       }
-      // Whenever the user explicitly chooses light mode, previously it was dark mode
-      if (localAppTheme === "dark") {
-        changeThemeToLight();
-      }
-      if (!localAppTheme) {
-        console.log("previously it was not set");
-        // Whenever the user explicitly chooses to respect the OS preference
-        detectSystemTheme(true);
-      }
     }
 
     function detectSystemTheme(manual = false) {
@@ -88,10 +80,7 @@ const { title } = Astro.props;
       ) {
         document.documentElement.classList.add("dark");
         if (manual) localStorage.setItem("theme", "dark");
-      } else {
-        document.documentElement.classList.remove("dark");
-        if (manual) localStorage.setItem("theme", "light");
-      }
+      } 
     }
 
     function changeThemeToDark() {
@@ -99,49 +88,6 @@ const { title } = Astro.props;
       document.documentElement.classList.add("dark");
     }
 
-    function changeThemeToLight() {
-      localStorage.setItem("theme", "light");
-      document.documentElement.classList.remove("dark");
-    }
-  </script>
-  <script>
-    const toggleMenu = document.querySelector(
-      "[data-toggle-nav]",
-    ) as HTMLButtonElement;
-    const navbar = document.querySelector("[data-navbar]") as HTMLDivElement;
-    const overlayNav = document.querySelector(
-      "[data-nav-overlay]",
-    ) as HTMLDivElement;
-    if (toggleMenu) {
-      toggleMenu.addEventListener("click", (e) => {
-        e.preventDefault();
-        if (toggleMenu.getAttribute("data-open-nav") === "false") {
-          toggleMenu.setAttribute("data-open-nav", "true");
-          overlayNav.setAttribute("data-is-visible", "true");
-          document.body.classList.add("!overflow-y-hidden");
-          navbar.style.height = `${navbar.scrollHeight}px`;
-        } else {
-          toggleMenu.setAttribute("data-open-nav", "false");
-          overlayNav.setAttribute("data-is-visible", "false");
-          document.body.classList.remove("!overflow-y-hidden");
-          navbar.style.height = "0px";
-        }
-      });
-
-      navbar.addEventListener("click", () => {
-        toggleMenu.setAttribute("data-open-nav", "false");
-        overlayNav.setAttribute("data-is-visible", "false");
-        document.body.classList.remove("!overflow-y-hidden");
-        navbar.style.height = "0px";
-      });
-
-      overlayNav.addEventListener("click", () => {
-        toggleMenu.setAttribute("data-open-nav", "false");
-        overlayNav.setAttribute("data-is-visible", "false");
-        document.body.classList.remove("!overflow-y-hidden");
-        navbar.style.height = "0px";
-      });
-    }
   </script>
   <script>
     const navbar = document.getElementById("navbar");
