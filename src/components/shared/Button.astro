@@ -1,0 +1,22 @@
+---
+export interface Props {
+  variant?: "primary" | "secondary";
+  className?: string;
+}
+
+const { variant = "primary", className } = Astro.props;
+
+const variants = {
+  primary:
+    "border border-white text-white hover:bg-white hover:text-black transition-all duration-500",
+  secondary:
+    "bg-white text-black hover:bg-gray-200 transition-all duration-300",
+};
+---
+
+<button
+  class={`px-6 py-3 rounded-full font-medium ${variants[variant]} ${className}`}
+>
+  <slot />
+</button>
+
