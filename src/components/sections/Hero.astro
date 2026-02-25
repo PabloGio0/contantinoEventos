@@ -19,43 +19,67 @@ export interface Props {
 const { className } = Astro.props;
 ---
 
-<section class="relative min-h-screen flex items-center overflow-hidden">
-
+<section 
+  class="relative min-h-screen flex items-center overflow-hidden px-4 sm:px-6 lg:px-8"
+  aria-label="Hero principal"
+>
   <div class="absolute inset-0">
     <!-- Video de fondo -->
- <video
-  autoplay
-  muted
-  loop
-  playsinline
-  class="absolute inset-0 w-full h-full object-cover"
->
-  <source src={hero} type="video/mp4" />
-</video>
-    <div class="absolute inset-0 bg-gradient-to-b from-slate-950/90 via-slate-950/80 to-slate-950/95"></div>
+    <video
+      autoplay
+      muted
+      loop
+      playsinline
+      class="absolute inset-0 w-full h-full object-cover"
+      poster={myHeroImage1}
+    >
+      <source src={hero} type="video/mp4" />
+    </video>
+    <div class="absolute inset-0 bg-gradient-to-b from-black/85 via-black/80 to-amber-950/90">
+    </div>
   </div>
 
   <!-- Contenido -->
-  <Container className="relative z-10 text-center max-w-4xl mx-auto">
-    <h1 class="text-4xl sm:text-5xl xl:text-6xl font-semibold text-white leading-tight">
-      Producción integral para eventos en CDMX
+  <Container className="relative z-10 text-center max-w-4xl mx-auto pt-20 sm:pt-24 md:pt-32 pb-12 sm:pb-16 md:pb-20">
+    <h1 class="text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-semibold text-white leading-tight px-4 sm:px-0">
+      Producción <span class="text-amber-400">integral</span><br class="hidden sm:block" />
+      para eventos en CDMX
     </h1>
 
-    <Paragraph className="mt-6 text-slate-300">
-      DJ profesional, audio e iluminación de alto nivel, mesas, sillas,
-      meseros y todo lo necesario para que tu evento funcione
-      de principio a fin, con un solo equipo.
+    <Paragraph className="mt-4 sm:mt-6 text-sm sm:text-base text-zinc-400 max-w-2xl mx-auto px-4 sm:px-6">
+      DJ profesional, audio e iluminación de alto nivel, mesas, sillas, meseros
+      y todo lo necesario para que tu evento funcione de principio a fin, con un
+      solo equipo.
     </Paragraph>
 
-    <div class="mt-8 w-full flex flex-col">
-        <div class="lg:mx-auto mb-5">
-          <CtaButton />
-        </div>
-        <div class="mx-auto mt-5">
-          <ByResult />
+    <div class="mt-8 sm:mt-10 w-full flex flex-col items-center px-4 sm:px-0">
+      <div class="w-full sm:w-auto mb-4 sm:mb-5">
+        <CtaButton />
+      </div>
+      
+      <div class="w-full sm:w-auto mt-4 sm:mt-5">
+        <ByResult />
+      </div>
+
+      <!-- Stats con mejor responsive -->
+      <div class="w-full mt-10 sm:mt-12">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 text-center max-w-3xl mx-auto">
+          <div>
+            <p class="text-3xl sm:text-4xl font-semibold text-amber-400">+20</p>
+            <p class="text-zinc-400 mt-1 sm:mt-2 text-xs sm:text-sm">Años de experiencia</p>
+          </div>
+
+          <div>
+            <p class="text-3xl sm:text-4xl font-semibold text-amber-400">+100</p>
+            <p class="text-zinc-400 mt-1 sm:mt-2 text-xs sm:text-sm">Eventos realizados</p>
+          </div>
+
+          <div>
+            <p class="text-3xl sm:text-4xl font-semibold text-amber-400">100%</p>
+            <p class="text-zinc-400 mt-1 sm:mt-2 text-xs sm:text-sm">Equipo profesional propio</p>
+          </div>
         </div>
       </div>
     </div>
   </Container>
-
 </section>
