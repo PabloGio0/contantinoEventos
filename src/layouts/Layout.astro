@@ -6,9 +6,11 @@ import Footer from "./Footer.astro";
 
 export interface Props {
   title: string;
+  description?: string;
+  keywords?: string;
 }
 
-const { title } = Astro.props;
+const { title, description, keywords } = Astro.props;
 ---
 
 <html lang="en">
@@ -17,13 +19,13 @@ const { title } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <meta name="description" content="Constantino Eventos & Producciones" />
+    <meta name="description" content={description || "Constantino Eventos & Producciones"} />
     <title>Constantino Eventos & Producciones - {title}</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="/style/custom.css" />
+    
   </head>
 
   <body class="overflow-hidden overflow-y-auto bg-body">

@@ -31,7 +31,7 @@ const { className } = Astro.props;
       loop
       playsinline
       class="absolute inset-0 w-full h-full object-cover"
-      poster={myHeroImage1}
+      poster={myHeroImage1.src}
     >
       <source src={hero} type="video/mp4" />
     </video>
@@ -65,7 +65,7 @@ const { className } = Astro.props;
       <div class="w-full mt-10 sm:mt-12">
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 text-center max-w-3xl mx-auto">
           <div>
-            <p class="text-3xl sm:text-4xl font-semibold text-amber-400">+20</p>
+            <p class="text-3xl sm:text-4xl font-semibold text-amber-400">+10</p>
             <p class="text-zinc-400 mt-1 sm:mt-2 text-xs sm:text-sm">Años de experiencia</p>
           </div>
 
