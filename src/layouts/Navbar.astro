@@ -10,19 +10,19 @@ const navItems = [
     text: "Inicio",
   },
   {
-    href: "servicios",
+    href: "/servicios",
     text: "Servicios",
   },
   {
-    href: "#services",
+    href: "/#paquetes",
+    text: "Paquetes",
+  },
+  {
+    href: "/#galeria",
     text: "Galería",
   },
   {
-    href: "#features",
-    text: "Nosotros",
-  },
-  {
-    href: "#faq",
+    href: "/#contacto",
     text: "Contacto",
   },
 ];
@@ -30,55 +30,103 @@ const navItems = [
 
 <header
   id="navbar"
-  class="fixed inset-x-0 top-0 z-50 py-6 transition-all duration-500 bg-transparent"
+  class="fixed inset-x-0 top-0 z-50 transition-all duration-500"
+  class:list={[
+    "py-4 lg:py-6",
+    "bg-black/50 backdrop-blur-md border-b border-amber-400/20",
+  ]}
 >
   <Container>
     <nav class="w-full flex items-center justify-between relative">
-      <!-- LOGO -->
-      <a href="/" class="flex items-center gap-3">
-        <img
-          src={monograma.src}
-          alt="Monograma Constantino"
-          class="w-9 h-9 object-contain"
-        />
+      <!-- LOGO MEJORADO -->
+      <a href="/" class="flex items-center gap-3 group">
+        <div class="relative">
+          <img
+            src={monograma.src}
+            alt="Monograma Constantino"
+            class="w-9 h-9 object-contain relative z-10 group-hover:scale-110 transition-transform duration-300"
+          />
+          <!-- Efecto de brillo ámbar detrás del logo -->
+          <div class="absolute inset-0 bg-amber-400/20 rounded-full blur-md group-hover:bg-amber-400/30 transition-all duration-300"></div>
+        </div>
 
-        <div class="text-lg font-semibold text-white tracking-wide">
-          Constantino Eventos & Producciones
+        <div class="flex flex-col">
+          <span class="text-lg font-semibold text-white leading-tight">
+            Constantino
+          </span>
+          <span class="text-xs text-amber-400/80 font-medium tracking-wider">
+            Eventos & Producciones
+          </span>
         </div>
       </a>
 
-      <!-- BOTÓN HAMBURGUESA -->
+      <!-- BOTÓN HAMBURGUESA MEJORADO -->
       <button
         id="menu-toggle"
-        class="lg:hidden text-white text-2xl"
+        class="lg:hidden w-10 h-10 rounded-full bg-amber-400/10 border border-amber-400/30 flex items-center justify-center text-amber-400 hover:bg-amber-400 hover:text-black transition-all duration-300"
         aria-label="Abrir menú"
       >
-        ☰
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
       </button>
 
-      <!-- LINKS (CENTRADOS EN DESKTOP) -->
+      <!-- MENÚ MÓVIL MEJORADO -->
       <ul
         id="mobile-menu"
-        class="hidden lg:flex flex-col lg:flex-row gap-6 text-lg
-          absolute lg:static top-full left-0 w-full lg:w-auto
-          bg-slate-950/95 lg:bg-transparent
-          backdrop-blur-md lg:backdrop-blur-none
-          p-6 lg:p-0
+        class="hidden lg:flex flex-col lg:flex-row gap-2 lg:gap-1 xl:gap-2
+          absolute lg:static top-full left-0 right-0 w-full lg:w-auto
+          bg-zinc-950/95 lg:bg-transparent
+          backdrop-blur-lg lg:backdrop-blur-none
+          border border-amber-400/20 lg:border-0
+          rounded-2xl lg:rounded-none
+          p-4 lg:p-0
           items-center
-          lg:mx-auto"
+          lg:mx-auto
+          shadow-2xl lg:shadow-none
+          mt-2 lg:mt-0"
       >
-        {navItems.map((item) => <Navitem {...item} />)}
+        {navItems.map((item) => (
+          <li class="w-full lg:w-auto">
+            <a
+              href={item.href}
+              class="block w-full lg:w-auto px-4 py-3 lg:py-2 rounded-xl lg:rounded-full
+                text-zinc-300 hover:text-amber-400
+                hover:bg-amber-400/10 lg:hover:bg-transparent
+                transition-all duration-300
+                text-center lg:text-left
+                font-medium"
+            >
+              {item.text}
+            </a>
+          </li>
+        ))}
 
-        <!-- CTA EN MOBILE -->
+        <!-- CTA EN MÓVIL -->
+        <li class="w-full lg:hidden mt-2 pt-2 border-t border-amber-400/20">
+          <a
+            href="/#cotizar"
+            class="block w-full px-4 py-3 rounded-xl
+              bg-gradient-to-r from-amber-400 to-amber-500
+              text-black font-semibold text-center
+              hover:from-amber-500 hover:to-amber-600
+              transition-all duration-300"
+          >
+            Cotizar Mi Evento
+          </a>
+        </li>
       </ul>
 
-      <!-- CTA EN DESKTOP -->
+      <!-- CTA EN DESKTOP MEJORADO -->
       <div class="hidden lg:block">
         <a
-          href="#cta"
-          class="px-6 py-3 rounded-full font-medium border border-white text-white hover:bg-amber-400 hover:text-black hover:border-black transition-all duration-500"
+          href="/#cotizar"
+          class="group relative px-6 py-2.5 rounded-full font-medium overflow-hidden transition-all duration-500
+            border border-white hover hover:bg-amber-400 hover:border-black"
         >
-          Cotizar Mi Evento
+          <span class="relative z-10 text-zinc-300 group-hover:text-black  transition-colors duration-300">
+            Cotizar Mi Evento
+          </span>
         </a>
       </div>
     </nav>
@@ -90,6 +138,43 @@ const navItems = [
 
     toggle?.addEventListener("click", () => {
       menu?.classList.toggle("hidden");
+      
+      // Animación del botón hamburguesa
+      const spans = toggle.querySelectorAll("span");
+      if (!menu?.classList.contains("hidden")) {
+        // Menú abierto
+        toggle.classList.add("bg-amber-400", "text-black");
+        toggle.classList.remove("bg-amber-400/10", "text-amber-400");
+      } else {
+        // Menú cerrado
+        toggle.classList.remove("bg-amber-400", "text-black");
+        toggle.classList.add("bg-amber-400/10", "text-amber-400");
+      }
+    });
+
+    // Cerrar menú al hacer clic en un enlace
+    menu?.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        if (window.innerWidth < 1024) {
+          menu.classList.add("hidden");
+          toggle?.classList.remove("bg-amber-400", "text-black");
+          toggle?.classList.add("bg-amber-400/10", "text-amber-400");
+        }
+      });
+    });
+
+    // Cambios en el scroll
+    const navbar = document.getElementById("navbar");
+    window.addEventListener("scroll", () => {
+      if (!navbar) return;
+
+      if (window.scrollY > 50) {
+        navbar.classList.add("bg-black/80", "border-amber-400/30", "py-3");
+        navbar.classList.remove("bg-black/50", "border-amber-400/20", "py-4", "lg:py-6");
+      } else {
+        navbar.classList.remove("bg-black/80", "border-amber-400/30", "py-3");
+        navbar.classList.add("bg-black/50", "border-amber-400/20", "py-4", "lg:py-6");
+      }
     });
   </script>
 </header>
