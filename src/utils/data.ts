@@ -1,33 +1,51 @@
-// src/data/services.ts
+// src/data/data.ts
 import visibilityDilemma from "../assets/images/visibility-dilemma.jpg";
 import engagementGap from "../assets/images/engagement-gap.jpg";
 import resultsInHibernation from "../assets/images/results-in-hibernation.jpg";
 
-// Definimos la interfaz para type safety
+// Interfaz para servicios (ya existente)
 export interface Service {
   slug: string;
   title: string;
   shortDescription: string;
   heroDescription: string;
-  longDescription?: string; // Para SEO y páginas individuales
-  icon?: string; // Emoji o clase de icono
+  longDescription?: string;
+  icon: string;
   features: string[];
   benefits: string[];
-  images?: {
-    hero?: string;
-    gallery?: string[];
-  };
   seo: {
     title: string;
     description: string;
     keywords: string[];
-    canonical?: string;
   };
-  faqs?: Array<{
-    question: string;
-    answer: string;
-  }>;
-  priceRange?: string;
+}
+
+// Interfaz para paquetes
+export interface Package {
+  slug: string;
+  name: string;
+  type: "basic" | "standard" | "premium" | "conference" | "custom";
+  description: string;
+  capacity: string;
+  price: string;
+  priceNote?: string;
+  durationHours?: number;
+  icon: string;
+  featured?: boolean;
+
+  // Vista comercial (tarjetas)
+  highlights: string[];
+
+  // Vista detalle (cuando entran al paquete)
+  technicalDetails?: string[];
+
+  includes: string[];
+
+  upsells?: {
+    name: string;
+    price: string;
+    description?: string;
+  }[];
 }
 
 export const services: Service[] = [
@@ -35,53 +53,49 @@ export const services: Service[] = [
     slug: "audio-iluminacion",
     title: "Audio e Iluminación Profesional",
     shortDescription: "Sonido potente e iluminación profesional para transformar tu evento.",
-    heroDescription: "Sistemas de sonido de alta fidelidad e iluminación arquitectónica diseñados para crear experiencias inolvidables.",
-    longDescription: "Transformamos tu evento con la mejor tecnología en audio e iluminación. Nuestros sistemas de sonido de alta fidelidad garantizan una experiencia acústica excepcional, mientras que la iluminación arquitectónica crea ambientes únicos y memorables. Contamos con equipos de última generación y técnicos especializados que trabajan para que cada detalle sonoro y visual esté perfectamente sincronizado.",
+    heroDescription: "Sistemas de sonido de alta fidelidad e iluminación arquitectónica diseñados para crear experiencias impactantes.",
+    longDescription: "Contamos con equipo de audio de primera línea: 4 Elipsis VA206, 2 Elipsis VAB118A, 2 EV ZLX G2, 2 Mackie Thump, 2 Graves FBT, todo ecualizado vía Driverack PA2. En iluminación: 6 Parleds, 6 Pixel Strobe 1048, 4 Cabezas móviles wash, 6 Cabezas móviles BEAM 7R, 2 Rayos láser 3W, Truss profesional, Control DMX (Chamsys) y máquina de humo.",
     icon: "🔊",
     features: [
-      "Sistemas de sonido profesional",
-      "Subwoofers de alto rendimiento",
-      "Iluminación arquitectónica LED",
-      "Cabezas móviles y rayos lazer",
-      "Montaje técnico especializado",
+      "4 Elipsis VA206 + 2 VAB118A",
+      "2 EV ZLX G2 + 2 Mackie Thump",
+      "Driverack PA2 para ecualización profesional",
+      "6 Parleds + 6 Pixel Strobe 1048",
+      "10 Cabezas móviles (4 wash + 6 BEAM 7R)",
+      "Control DMX Chamsys + máquina de humo"
     ],
     benefits: [
-      "Equipo propio sin intermediarios - garantía de calidad",
-      "Montaje seguro y puntual - cumplimos horarios",
-      "Calidad profesional garantizada - sonido claro en todo el espacio",
-      "Ambientes personalizables según tu temática"
+      "Sonido claro y potente en todo el espacio",
+      "Efectos de iluminación sincronizados con la música",
+      "Técnicos especializados durante todo el evento"
     ],
     seo: {
-      title: "Audio e Iluminación Profesional para Eventos en CDMX | Rentamos Equipo de Sonido",
-      description: "Rentamos equipo de sonido profesional e iluminación para eventos en CDMX. Sistemas line array, cabezas móviles, rayos laser y técnicos especializados. ¡Cotiza aquí!",
-      keywords: ["audio profesional para eventos", "iluminación para eventos", "renta de sonido cdmx", "equipo de audio profesional", "iluminación arquitectónica", "BEAM", "Microfonia", "EV"], 
+      title: "Audio e Iluminación Profesional para Eventos en CDMX",
+      description: "Renta de equipo de sonido profesional e iluminación para eventos. Elipsis, EV, Mackie y más. ¡Cotiza aquí!",
+      keywords: ["audio profesional", "iluminación para eventos", "renta de sonido"]
     }
   },
   {
     slug: "dj-profesional",
-    title: "DJ Profesional para Eventos",
+    title: "DJ Profesional",
     shortDescription: "Ambientación musical personalizada y mezcla en vivo.",
-    heroDescription: "Creamos la atmósfera perfecta con selección musical estratégica y mezcla en vivo adaptada a tu evento.",
-    longDescription: "Más que solo reproducir música, creamos la atmósfera perfecta para tu evento. Nuestros DJs profesionales tienen más de 10 años de experiencia leyendo la pista y adaptando la música en tiempo real para mantener la energía ideal. Desde eventos corporativos hasta bodas, trabajamos contigo para diseñar una experiencia musical única que tus invitados recordarán.",
+    heroDescription: "Creamos la atmósfera perfecta con selección musical estratégica.",
     icon: "🎧",
     features: [
-      "Curaduría musical personalizada para tu evento",
-      "Mezcla en vivo profesional con equipo Pioneer",
-      "Experiencia en eventos sociales y corporativos",
-      "Interacción con el público y lectura de pista",
-      "Biblioteca musical extensa y actualizada"
+      "DJ con experiencia en eventos sociales",
+      "Biblioteca musical extensa",
+      "Mezcla en vivo profesional",
+      "Coordinación previa de playlist"
     ],
     benefits: [
-      "Lectura de pista profesional - música que conecta",
-      "Transiciones limpias y energéticas sin cortes",
-      "Ambiente dinámico y elegante toda la noche",
-      "Coordinación previa para selección musical",
-      "Backup de equipo garantizado"
+      "Música adaptada a tu público",
+      "Transiciones perfectas toda la noche",
+      "Ambiente dinámico y elegante"
     ],
     seo: {
-      title: "DJ Profesional para Bodas y Eventos en CDMX | Música en Vivo",
-      description: "✅ Contrata DJ profesional para tu boda o evento en CDMX. Mezcla en vivo, equipo Pioneer y experiencia en eventos sociales. ¡Ambientación musical personalizada!",
-      keywords: ["dj para bodas cdmx", "dj profesional cdmx", "música para eventos", "dj para fiestas", "ambientación musical"]
+      title: "DJ Profesional para Bodas y Eventos en CDMX",
+      description: "DJ profesional para tu evento. Música personalizada y mezcla en vivo.",
+      keywords: ["dj profesional", "música para eventos"]
     }
   },
   {
@@ -89,57 +103,243 @@ export const services: Service[] = [
     title: "Mobiliario y Montaje",
     shortDescription: "Mesas, sillas y montaje profesional.",
     heroDescription: "Organización estratégica del espacio con mobiliario funcional y elegante.",
-    longDescription: "El mobiliario adecuado transforma por completo la experiencia de tus invitados. Ofrecemos una amplia selección de mesas, sillas y elementos decorativos que se adaptan a cualquier tipo de evento. Nuestro equipo se encarga de todo el montaje y desmontaje, asegurando que cada espacio esté perfectamente distribuido para maximizar la comodidad y la funcionalidad.",
     icon: "🪑",
     features: [
-      "Mesas redondas, rectangulares y cocktail",
-      "Sillas Tiffany, egipcias y ghost",
-      "Bufeteras y chafers para catering",
-      "Distribución estratégica del espacio",
-      "Montaje y desmontaje profesional",
-      "Mantenimiento y limpieza incluidos"
+      "Sillas acojinadas plegables",
+      "Sillas Tiffany",
+      "Mesas redondas y tablones",
+      "Barra de bebidas",
+      "Vajilla 3 tiempos para 100 personas",
+      "Mantelería profesional",
+      "Chafers para buffet"
     ],
     benefits: [
-      "Presentación impecable que impresiona",
-      "Optimización del espacio al máximo",
-      "Coordinación eficiente con otros proveedores",
-      "Logística completa sin preocupaciones",
-      "Calidad y estilo en cada pieza"
+      "Presentación impecable",
+      "Optimización del espacio",
+      "Coordinación eficiente"
     ],
     seo: {
-      title: "Renta de Mesas y Sillas para Eventos en CDMX | Mobiliario Profesional",
-      description: "Rentamos mesas, sillas y mobiliario para eventos en CDMX. Montaje profesional incluido. Amplia variedad de estilos para bodas, corporativos y fiestas.",
-      keywords: ["renta de mesas cdmx", "renta de sillas para eventos", "mobiliario para bodas", "bufeteras en renta", "montaje de eventos"]
+      title: "Renta de Mobiliario para Eventos en CDMX",
+      description: "Renta de mesas, sillas, vajilla y mantelería para eventos.",
+      keywords: ["renta de mobiliario", "sillas para eventos"]
     }
   },
   {
     slug: "personal-coordinacion",
     title: "Personal y Coordinación",
     shortDescription: "Meseros capacitados y logística integral.",
-    heroDescription: "Supervisión técnica y atención profesional para garantizar que todo fluya correctamente.",
-    longDescription: "El éxito de un evento no solo depende del equipo técnico, sino también del personal que atiende a tus invitados. Contamos con meseros altamente capacitados, coordinadores de evento y personal de apoyo que trabajan en equipo para garantizar una experiencia excepcional. Desde la recepción hasta el último momento, nuestro equipo vela por cada detalle.",
+    heroDescription: "Atención profesional para garantizar que todo fluya correctamente.",
     icon: "👥",
     features: [
-      "Meseros uniformados y capacitados",
-      "Coordinación logística completa",
-      "Supervisión técnica durante todo el evento",
-      "Atención profesional y cálida",
-      "Personal de apoyo para montaje",
-      "Staff bilingüe disponible"
+      "Meseros uniformados",
+      "Coordinación logística",
+      "Supervisión técnica",
+      "Personal de apoyo"
     ],
     benefits: [
-      "Organización sin estrés - nosotros coordinamos",
-      "Servicio atento y profesional con tus invitados",
-      "Flujo eficiente del evento garantizado",
-      "Respuesta inmediata a imprevistos",
-      "Imagen profesional que refuerza tu marca"
+      "Servicio atento y profesional",
+      "Organización sin estrés",
+      "Flujo eficiente del evento"
     ],
     seo: {
-      title: "Meseros y Personal para Eventos en CDMX | Staff Profesional",
-      description: "Contrata meseros profesionales y personal para tu evento en CDMX. Staff capacitado, coordinadores y atención de primera. ¡Servicio impecable garantizado!",
-      keywords: ["meseros para eventos cdmx", "staff para bodas", "personal para fiestas", "coordinadores de eventos", "meseros profesionales"]
+      title: "Meseros y Personal para Eventos en CDMX",
+      description: "Contrata meseros profesionales y personal para tu evento.",
+      keywords: ["meseros para eventos", "staff para bodas"]
     }
   }
+];
+
+export const packages: Package[] = [
+    {
+  slug: "paquete-standard",
+  name: "Paquete Standard",
+  type: "standard",
+  description: "Ideal para eventos sociales de 30 a 50 personas. Sonido potente, iluminación elegante y DJ profesional.",
+  capacity: "30 - 50 personas",
+  price: "$8,490",
+  durationHours: 4,
+  icon: "🎵",
+
+  highlights: [
+    "Sistema de sonido profesional",
+    "Iluminación ambiental elegante",
+    "DJ profesional en vivo",
+    "1 micrófono inalámbrico incluido",
+    "Técnico durante todo el evento"
+  ],
+
+  technicalDetails: [
+    "2 Mackie Thump",
+    "2 Elipsis VA206",
+    "1 Subwoofer Elipsis VAB118A",
+    "6 Parleds",
+    "Driverack PA2"
+  ],
+
+  includes: [
+    "Montaje y desmontaje",
+    "Operador técnico",
+    "Asesoría previa de playlist"
+  ],
+
+  upsells: [
+    { name: "Hora adicional", price: "+$1,200", description: "Extiende tu evento una hora más" },
+    { name: "Karaoke", price: "+$500", description: "Pantalla o proyector + micrófono inalámbrico" },
+    { name: "Pista de baile LED 3x3", price: "+$2,500" },
+    { name: "Micrófono inalámbrico adicional", price: "+$800" }
+  ]
+},
+  {
+  slug: "paquete-plus",
+  name: "Paquete Plus",
+  type: "basic",
+  description: "La combinación perfecta de audio, iluminación y mobiliario para eventos de 50 a 80 personas.",
+  capacity: "50 - 80 personas",
+  price: "$15,900",
+  durationHours: 5,
+  icon: "🌟",
+  featured: true,
+
+  highlights: [
+    "Sistema de sonido completo",
+    "Iluminación dinámica con efectos",
+    "DJ profesional en vivo",
+    "Mobiliario para invitados",
+    "2 meseros incluidos",
+    "1 micrófono inalámbrico"
+  ],
+
+  technicalDetails: [
+    "4 Elipsis VA206",
+    "2 Subwoofers VAB118A",
+    "2 EV ZLX G2",
+    "6 Parleds + 4 Pixel Strobe",
+    "2 Cabezas móviles wash",
+    "Control DMX Chamsys"
+  ],
+
+  includes: [
+    "30 sillas acojinadas",
+    "8 mesas redondas",
+    "Mantelería profesional",
+    "Montaje completo"
+  ],
+
+  upsells: [
+    { name: "Hora adicional", price: "+$1,400" },
+    { name: "Karaoke", price: "+$500" },
+    { name: "Pista de baile LED 4x4", price: "+$3,500" },
+    { name: "Cabezas móviles BEAM", price: "+$2,800" }
+  ]
+},
+  {
+  slug: "paquete-premium",
+  name: "Paquete Premium",
+  type: "premium",
+  description: "Experiencia completa de producción profesional para eventos de 80 a 120+ personas.",
+  capacity: "80 - 120+ personas",
+  price: "$24,900",
+  durationHours: 6,
+  icon: "✨",
+
+  highlights: [
+    "Producción integral profesional",
+    "Sistema completo de audio e iluminación",
+    "DJ profesional extendido",
+    "Mobiliario completo",
+    "4 meseros + coordinador",
+    "1 micrófono inalámbrico incluido"
+  ],
+
+  technicalDetails: [
+    "4 Elipsis VA206 + 2 VAB118A",
+    "2 EV ZLX G2 + 2 Mackie Thump",
+    "6 Parleds + 6 Pixel Strobe",
+    "4 Wash + 6 BEAM 7R",
+    "2 Rayos láser 3W",
+    "Máquina de humo",
+    "Truss profesional",
+    "Control DMX avanzado"
+  ],
+
+  includes: [
+    "50 sillas + 10 Tiffany",
+    "12 mesas redondas + 2 tablones",
+    "Vajilla 3 tiempos (100 pax)",
+    "Barra de bebidas",
+    "Chafers buffet (4)"
+  ],
+
+  upsells: [
+    { name: "Hora adicional", price: "+$1,800" },
+    { name: "Karaoke Premium", price: "+$500" },
+    { name: "Pista LED 5x5", price: "+$4,500" },
+    { name: "Micrófono inalámbrico adicional", price: "+$800" }
+  ]
+},
+{
+  slug: "paquete-conferencias",
+  name: "Paquete Conferencias",
+  type: "conference",
+  description: "Producción técnica profesional para conferencias, presentaciones y eventos corporativos.",
+  capacity: "Hasta 150 personas",
+  price: "$18,900",
+  durationHours: 6,
+  icon: "🎤",
+
+  highlights: [
+    "Sistema de audio claro y profesional",
+    "2 micrófonos inalámbricos",
+    "1 micrófono alámbrico",
+    "2 proyectores HD",
+    "Iluminación para escenario",
+    "Técnico especializado durante el evento"
+  ],
+
+  technicalDetails: [
+    "Sistema Line Array Elipsis",
+    "Driverack PA2",
+    "Monitores de escenario",
+    "Iluminación frontal tipo wash",
+    "Control DMX"
+  ],
+
+  includes: [
+    "Montaje técnico completo",
+    "Prueba de sonido previa",
+    "Soporte técnico en ponencias"
+  ],
+
+  upsells: [
+    { name: "Hora adicional", price: "+$1,500" },
+    { name: "Pantalla LED", price: "Cotización especial" },
+    { name: "Grabación del evento", price: "Cotización especial" }
+  ]
+},
+  {
+  slug: "paquete-personalizado",
+  name: "Arma tu paquete",
+  type: "custom",
+  description: "Diseña tu evento a la medida seleccionando exactamente lo que necesitas.",
+  capacity: "La que necesites",
+  price: "Personalizado",
+  priceNote: "Cotización a la medida",
+  icon: "⚙️",
+
+  highlights: [
+    "Selecciona solo lo que necesitas",
+    "Audio e iluminación por separado",
+    "Mobiliario a elección",
+    "Personal adicional",
+    "Karaoke y pista opcional"
+  ],
+
+  includes: [
+    "Asesoría personalizada",
+    "Cotización detallada",
+    "Flexibilidad total"
+  ]
+}
 ];
 
 export const solutions = [
@@ -169,26 +369,26 @@ export const solutions = [
 export const faqs = [
   {
     question: "¿Con cuánta anticipación debo reservar?",
-    answer: "Recomendamos reservar con al menos 1 a 3 meses de anticipación, ya que trabajamos con fechas limitadas cada mes para garantizar calidad en cada evento."
+    answer: "Recomendamos reservar con al menos 1 a 3 meses de anticipación, ya que trabajamos con fechas limitadas cada mes."
   },
   {
     question: "¿El equipo de audio e iluminación es propio?",
-    answer: "Sí. Contamos con equipo profesional propio, lo que nos permite garantizar calidad, puntualidad y control total durante el evento. No dependemos de terceros."
+    answer: "Sí. Contamos con equipo profesional propio (Elipsis, EV, Mackie, etc.) lo que garantiza calidad y control total."
   },
   {
-    question: "¿Se puede personalizar la música y ambientación?",
-    answer: "Claro. Diseñamos la experiencia musical según el tipo de evento, perfil de invitados y preferencias del cliente. Trabajamos contigo para crear la atmósfera perfecta."
+    question: "¿Puedo armar mi paquete personalizado?",
+    answer: "¡Claro! Contamos con la opción 'Arma tu paquete' donde puedes seleccionar exactamente lo que necesitas."
   },
   {
-    question: "¿También ofrecen mobiliario y personal?",
-    answer: "Sí. Podemos integrar mobiliario, bufeteras, mesas, sillas y personal capacitado para que tengas todo en un solo proveedor. Producción integral."
+    question: "¿El karaoke tiene costo adicional?",
+    answer: "Sí, el karaoke tiene un costo adicional de $500 que incluye pantalla, micrófono y selección de canciones."
   },
   {
-    question: "¿Atienden eventos corporativos?",
-    answer: "Sí. Trabajamos tanto eventos sociales como corporativos, adaptando la producción al formato requerido. Congresos, convenciones, lanzamientos y más."
+    question: "¿Qué incluye exactamente el equipo de audio?",
+    answer: "Contamos con 4 Elipsis VA206, 2 Elipsis VAB118A, 2 EV ZLX G2, 2 Mackie Thump, 2 Graves FBT, todo ecualizado con Driverack PA2."
   },
   {
-    question: "¿En qué zonas trabajan?",
-    answer: "Operamos principalmente en CDMX y área metropolitana (Estado de México), con posibilidad de desplazamiento a otros estados según el evento."
+    answer: "Operamos principalmente en CDMX y área metropolitana, con posibilidad de desplazamiento a otros estados.",
+    question: "¿En qué zonas trabajan?"
   }
 ];
