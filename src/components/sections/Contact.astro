@@ -298,16 +298,16 @@ const PHONE = "525581657250";
     const readableDate = `${parseInt(d)} de ${months[parseInt(m)-1]} de ${y}`;
 
     // Construir mensaje
-    let msg = `¡Hola! Me interesa cotizar un evento con Constantino Eventos 🎉\n\n`;
-    msg += `👤 *Nombre:* ${name}\n`;
-    msg += `📱 *Teléfono:* ${phone}\n`;
-    msg += `🎊 *Tipo de evento:* ${type}\n`;
-    msg += `📅 *Fecha:* ${readableDate}\n`;
-    if (time)   msg += `🕐 *Horario:* ${time}\n`;
-    msg += `👥 *Invitados:* ${guests}\n`;
-    if (place)  msg += `📍 *Lugar:* ${place}\n`;
-    if (pkg)    msg += `📦 *Paquete/Servicio:* ${pkg}\n`;
-    if (notes)  msg += `📝 *Notas:* ${notes}\n`;
+    let msg = `¡Hola! Me interesa cotizar un evento con Constantino Eventos\n\n`;
+    msg += `*Nombre:* ${name}\n`;
+    msg += `*Teléfono:* ${phone}\n`;
+    msg += `*Tipo de evento:* ${type}\n`;
+    msg += `*Fecha:* ${readableDate}\n`;
+    if (time)   msg += `*Horario:* ${time}\n`;
+    msg += `*Invitados:* ${guests}\n`;
+    if (place)  msg += `*Lugar:* ${place}\n`;
+    if (pkg)    msg += `*Paquete/Servicio:* ${pkg}\n`;
+    if (notes)  msg += `*Notas:* ${notes}\n`;
     msg += `\n¿Tienen disponibilidad para esa fecha?`;
 
     const url = `https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}`;
