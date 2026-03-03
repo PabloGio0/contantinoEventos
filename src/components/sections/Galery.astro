@@ -1,0 +1,285 @@
+---
+// src/pages/galeria.astro
+import Container from "../shared/Container.astro";
+
+// Cuando tengas tus fotos reales, reemplaza estos imports por los tuyos:
+// import foto1 from "../assets/galeria/evento1.jpg";
+// Y agrega cada una al array `photos` abajo.
+
+// Por ahora usamos placeholders con dimensiones variadas para simular masonry real
+const photos = [
+  { src: "/galery/foto-01.jpg", alt: "Iluminación en boda", w: 800, h: 1200 },
+  { src: "/galery/foto-02.png", alt: "Setup de audio profesional", w: 1200, h: 800 },
+  { src: "/galery/foto-03.jpg", alt: "DJ en evento corporativo", w: 800, h: 800 },
+  { src: "/galery/foto-04.jpeg", alt: "Pista de baile iluminada", w: 1200, h: 900 },
+  { src: "/galery/foto-05.jpg", alt: "Montaje de XV años", w: 800, h: 1100 },
+  { src: "/galery/foto-06.jpg", alt: "Cabezas móviles en acción", w: 1200, h: 800 },
+  { src: "/galery/foto-07.jpg", alt: "Decoración de mesas", w: 900, h: 1200 },
+  { src: "/galery/foto-08.jpg", alt: "Evento al aire libre", w: 1200, h: 800 },
+  { src: "/galery/foto-09.jpg", alt: "Equipo de sonido completo", w: 800, h: 900 },
+  { src: "/galery/foto-10.jpg", alt: "Boda con laser show", w: 1200, h: 1000 },
+  { src: "/galery/foto-11.jpg", alt: "Conferencia corporativa", w: 800, h: 600 },
+  { src: "/galery/foto-12.jpg", alt: "Fiesta de graduación", w: 900, h: 1200 },
+];
+---
+
+
+  <main class="min-h-screen bg-black overflow-hidden">
+
+    <!-- ░░ HERO ░░ -->
+    <section class="relative pt-36 pb-16 overflow-hidden">
+      <!-- Fondo con gradiente ámbar -->
+      <div class="absolute inset-0 bg-gradient-to-b from-black via-zinc-950 to-black"></div>
+      <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-amber-400/8 rounded-full blur-3xl pointer-events-none"></div>
+
+      <!-- Patrón grid sutil -->
+      <div class="absolute inset-0 opacity-20 pointer-events-none"
+        style="background-image: radial-gradient(circle at 1px 1px, rgba(251,191,36,0.06) 1px, transparent 0); background-size: 40px 40px;">
+      </div>
+
+      <Container className="relative z-10 text-center">
+        <span class="inline-block px-4 py-2 rounded-full bg-amber-400/10 border border-amber-400/20 text-amber-400 text-sm font-medium mb-6 tracking-wider uppercase">
+          Nuestro trabajo
+        </span>
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-semibold text-white leading-tight mb-6">
+          Eventos que <span class="text-amber-400">hablan</span> por sí solos
+        </h1>
+        <p class="text-zinc-400 text-lg max-w-2xl mx-auto">
+          Más de 10 años creando experiencias únicas en CDMX. Cada foto cuenta una historia de producción impecable.
+        </p>
+
+        <!-- Stats rápidas -->
+        <div class="flex justify-center gap-12 mt-10">
+          <div>
+            <p class="text-3xl font-semibold text-amber-400">+100</p>
+            <p class="text-zinc-500 text-sm mt-1">Eventos realizados</p>
+          </div>
+          <div class="w-px bg-amber-400/20"></div>
+          <div>
+            <p class="text-3xl font-semibold text-amber-400">+10</p>
+            <p class="text-zinc-500 text-sm mt-1">Años de experiencia</p>
+          </div>
+          <div class="w-px bg-amber-400/20"></div>
+          <div>
+            <p class="text-3xl font-semibold text-amber-400">100%</p>
+            <p class="text-zinc-500 text-sm mt-1">Equipo propio</p>
+          </div>
+        </div>
+      </Container>
+    </section>
+
+    <!-- ░░ GALERÍA MASONRY ░░ -->
+    <section class="pb-24">
+      <Container>
+
+        <!-- Grid masonry con CSS columns -->
+        <div
+          id="gallery-grid"
+          class="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-3 space-y-3"
+        >
+          {photos.map((photo, i) => (
+            <div
+              class="gallery-item break-inside-avoid cursor-zoom-in group relative overflow-hidden rounded-2xl"
+              data-index={i}
+              data-src={photo.src}
+              data-alt={photo.alt}
+            >
+              <img
+                src={photo.src}
+                alt={photo.alt}
+                width={photo.w}
+                height={photo.h}
+                loading={i < 4 ? "eager" : "lazy"}
+                class="w-full h-auto object-cover
+                  transition-transform duration-500 ease-out
+                  group-hover:scale-105"
+              />
+              <!-- Overlay hover -->
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent
+                opacity-0 group-hover:opacity-100 transition-opacity duration-300
+                flex items-end p-4">
+                <p class="text-white text-sm font-medium translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                  {photo.alt}
+                </p>
+              </div>
+              <!-- Ícono zoom -->
+              <div class="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/50 backdrop-blur-sm
+                flex items-center justify-center text-white
+                opacity-0 group-hover:opacity-100 transition-opacity duration-300 scale-75 group-hover:scale-100">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/>
+                </svg>
+              </div>
+            </div>
+          ))}
+        </div>
+
+      </Container>
+    </section>
+
+    <!-- ░░ CTA ░░ -->
+    <section class="py-20 relative overflow-hidden border-t border-amber-400/10">
+      <div class="absolute inset-0 bg-gradient-to-b from-zinc-950 to-black pointer-events-none"></div>
+      <div class="absolute top-0 right-0 w-96 h-96 bg-amber-400/5 rounded-full blur-3xl pointer-events-none"></div>
+
+      <Container className="relative z-10 text-center max-w-2xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-semibold text-white mb-4">
+          ¿Quieres tu evento <span class="text-amber-400">aquí</span>?
+        </h2>
+        <p class="text-zinc-400 text-lg mb-10">
+          Cotiza ahora y crea momentos que recordarás toda la vida.
+        </p>
+        <a
+          href="https://wa.me/525581657250?text=Hola,%20vi%20su%20galer%C3%ADa%20y%20me%20interesa%20cotizar%20un%20evento"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-3 px-8 py-4 rounded-full font-semibold
+            bg-gradient-to-r from-amber-400 to-amber-500 text-black
+            hover:from-amber-500 hover:to-amber-600
+            transition-all duration-300 shadow-lg shadow-amber-400/20
+            hover:shadow-amber-400/30 hover:scale-105 active:scale-[0.98]"
+        >
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+          </svg>
+          Cotizar Mi Evento
+        </a>
+      </Container>
+    </section>
+
+  </main>
+
+<!-- ░░ LIGHTBOX ░░ -->
+<div
+  id="lightbox"
+  class="fixed inset-0 z-[100] bg-black/95 backdrop-blur-md
+    flex items-center justify-center
+    opacity-0 pointer-events-none
+    transition-opacity duration-300"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Vista ampliada de foto"
+>
+  <!-- Cerrar -->
+  <button
+    id="lb-close"
+    class="absolute top-5 right-5 w-11 h-11 rounded-full bg-zinc-800/80 border border-zinc-700
+      flex items-center justify-center text-zinc-300
+      hover:bg-amber-400 hover:text-black hover:border-amber-400
+      transition-all duration-200 z-10"
+    aria-label="Cerrar"
+  >
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+    </svg>
+  </button>
+
+  <!-- Anterior -->
+  <button
+    id="lb-prev"
+    class="absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-zinc-800/80 border border-zinc-700
+      flex items-center justify-center text-zinc-300
+      hover:bg-amber-400 hover:text-black hover:border-amber-400
+      transition-all duration-200 z-10"
+    aria-label="Foto anterior"
+  >
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+    </svg>
+  </button>
+
+  <!-- Imagen -->
+  <div class="relative max-w-5xl max-h-[85vh] w-full mx-16 flex items-center justify-center">
+    <img
+      id="lb-img"
+      src=""
+      alt=""
+      class="max-w-full max-h-[85vh] object-contain rounded-2xl shadow-2xl
+        transition-opacity duration-200"
+    />
+    <p id="lb-caption" class="absolute -bottom-8 left-0 right-0 text-center text-zinc-400 text-sm"></p>
+  </div>
+
+  <!-- Siguiente -->
+  <button
+    id="lb-next"
+    class="absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-zinc-800/80 border border-zinc-700
+      flex items-center justify-center text-zinc-300
+      hover:bg-amber-400 hover:text-black hover:border-amber-400
+      transition-all duration-200 z-10"
+    aria-label="Foto siguiente"
+  >
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+    </svg>
+  </button>
+
+  <!-- Contador -->
+  <div class="absolute bottom-5 left-1/2 -translate-x-1/2 text-zinc-500 text-sm">
+    <span id="lb-counter"></span>
+  </div>
+</div>
+
+<script>
+  const items   = Array.from(document.querySelectorAll<HTMLElement>(".gallery-item")
+);
+  const lb      = document.getElementById("lightbox")!;
+  const lbImg   = document.getElementById("lb-img") as HTMLImageElement;
+  const lbCap   = document.getElementById("lb-caption")!;
+  const lbCount = document.getElementById("lb-counter")!;
+  const total   = items.length;
+  let current   = 0;
+
+  function openLightbox(index: number) {
+    current = index;
+    const item = items[index];
+    lbImg.src     = item.dataset.src!;
+    lbImg.alt     = item.dataset.alt!;
+    lbCap.textContent  = item.dataset.alt!;
+    lbCount.textContent = `${index + 1} / ${total}`;
+    lb.classList.remove("opacity-0", "pointer-events-none");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeLightbox() {
+    lb.classList.add("opacity-0", "pointer-events-none");
+    document.body.style.overflow = "";
+  }
+
+  function navigate(dir: 1 | -1) {
+    current = (current + dir + total) % total;
+    lbImg.style.opacity = "0";
+    setTimeout(() => {
+      const item = items[current];
+      lbImg.src  = item.dataset.src!;
+      lbImg.alt  = item.dataset.alt!;
+      lbCap.textContent  = item.dataset.alt!;
+      lbCount.textContent = `${current + 1} / ${total}`;
+      lbImg.style.opacity = "1";
+    }, 150);
+  }
+
+  // Abrir al hacer clic en imagen
+  items.forEach((item, i) => {
+    item.addEventListener("click", () => openLightbox(i));
+  });
+
+  // Controles
+  document.getElementById("lb-close")?.addEventListener("click", closeLightbox);
+  document.getElementById("lb-prev")?.addEventListener("click", () => navigate(-1));
+  document.getElementById("lb-next")?.addEventListener("click", () => navigate(1));
+
+  // Cerrar al hacer clic en fondo
+  lb.addEventListener("click", (e) => {
+    if (e.target === lb) closeLightbox();
+  });
+
+  // Teclado
+  document.addEventListener("keydown", (e) => {
+    if (lb.classList.contains("pointer-events-none")) return;
+    if (e.key === "Escape")     closeLightbox();
+    if (e.key === "ArrowLeft")  navigate(-1);
+    if (e.key === "ArrowRight") navigate(1);
+  });
+</script>
