@@ -1,16 +1,11 @@
 ---
-import { Image } from "astro:assets";
-import Button from "../shared/Button.astro";
 import Container from "../shared/Container.astro";
 import Paragraph from "../shared/Paragraph.astro";
-import ByNumber from "./ByNumber.astro";
-
-import myHeroImage1 from "../../assets/images/hero1.jpg";
-import myHeroImage2 from "../../assets/images/hero2.jpg";
-import myHeroImage3 from "../../assets/images/hero3.jpg";
-import hero from "../../assets/videos/hero.mp4";
 import CtaButton from "../shared/CtaButton.astro";
 import ByResult from "./ByResult.astro";
+
+import myHeroImage1 from "../../assets/images/hero1.jpg";
+import hero from "../../assets/videos/hero.mp4";
 
 export interface Props {
   className?: string;
@@ -19,12 +14,12 @@ export interface Props {
 const { className } = Astro.props;
 ---
 
-<section 
+<section
   class="relative min-h-screen flex items-center overflow-hidden px-4 sm:px-6 lg:px-8"
   aria-label="Hero principal"
 >
+  <!-- Fondo con video -->
   <div class="absolute inset-0">
-    <!-- Video de fondo -->
     <video
       autoplay
       muted
@@ -35,12 +30,12 @@ const { className } = Astro.props;
     >
       <source src={hero} type="video/mp4" />
     </video>
-    <div class="absolute inset-0 bg-gradient-to-b from-black/85 via-black/80 to-amber-950/90">
-    </div>
+    <div class="absolute inset-0 bg-gradient-to-b from-black/85 via-black/80 to-amber-950/90"></div>
   </div>
 
   <!-- Contenido -->
   <Container className="relative z-10 text-center max-w-4xl mx-auto pt-20 sm:pt-24 md:pt-32 pb-12 sm:pb-16 md:pb-20">
+
     <h1 class="text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-semibold text-white leading-tight px-4 sm:px-0">
       Producción <span class="text-amber-400">integral</span><br class="hidden sm:block" />
       para eventos en CDMX
@@ -53,33 +48,41 @@ const { className } = Astro.props;
     </Paragraph>
 
     <div class="mt-8 sm:mt-10 w-full flex flex-col items-center px-4 sm:px-0">
-      <div class="w-full sm:w-auto mb-4 sm:mb-5">
-        <CtaButton />
+
+      <!-- CTAs -->
+      <div class="flex flex-col sm:flex-row items-center gap-4">
+        <CtaButton label="Cotizar mi evento gratis" />
+        <a
+          href="/paquetes"
+          class="text-zinc-300 hover:text-amber-400 transition-colors duration-300 text-sm underline underline-offset-4"
+        >
+          Ver paquetes y precios →
+        </a>
       </div>
-      
-      <div class="w-full sm:w-auto mt-4 sm:mt-5">
+
+      <!-- Links rápidos a servicios -->
+      <div class="w-full sm:w-auto mt-8 sm:mt-10">
         <ByResult />
       </div>
 
-      <!-- Stats con mejor responsive -->
+      <!-- Stats -->
       <div class="w-full mt-10 sm:mt-12">
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 text-center max-w-3xl mx-auto">
+        <div class="grid grid-cols-3 gap-6 sm:gap-8 text-center max-w-3xl mx-auto">
           <div>
             <p class="text-3xl sm:text-4xl font-semibold text-amber-400">+10</p>
             <p class="text-zinc-400 mt-1 sm:mt-2 text-xs sm:text-sm">Años de experiencia</p>
           </div>
-
           <div>
             <p class="text-3xl sm:text-4xl font-semibold text-amber-400">+100</p>
             <p class="text-zinc-400 mt-1 sm:mt-2 text-xs sm:text-sm">Eventos realizados</p>
           </div>
-
           <div>
             <p class="text-3xl sm:text-4xl font-semibold text-amber-400">100%</p>
-            <p class="text-zinc-400 mt-1 sm:mt-2 text-xs sm:text-sm">Equipo profesional propio</p>
+            <p class="text-zinc-400 mt-1 sm:mt-2 text-xs sm:text-sm">Equipo propio</p>
           </div>
         </div>
       </div>
+
     </div>
   </Container>
 </section>

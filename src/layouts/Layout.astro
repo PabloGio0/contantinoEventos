@@ -3,117 +3,35 @@ import "../styles/global.css";
 import "../styles/custom.css";
 import Navbar from "./Navbar.astro";
 import Footer from "./Footer.astro";
-
+ 
 export interface Props {
   title: string;
   description?: string;
   keywords?: string;
 }
-
+ 
 const { title, description, keywords } = Astro.props;
 ---
-
-<html lang="en">
+ 
+<html lang="es">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
-    <meta name="description" content={description || "Constantino Eventos & Producciones"} />
-    <title>Constantino Eventos & Producciones - {title}</title>
+    <meta name="description" content={description || "Producción integral para eventos en CDMX. DJ profesional, audio, iluminación, mobiliario y personal capacitado."} />
+    {keywords && <meta name="keywords" content={keywords} />}
+    <title>{title} — Constantino Eventos & Producciones</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    
   </head>
-
-  <body class="overflow-hidden overflow-y-auto bg-body">
+ 
+  <!-- ✅ bg-black en lugar de bg-body -->
+  <body class="overflow-x-hidden bg-black text-white">
     <Navbar />
     <slot />
     <Footer />
   </body>
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const ctaButton = document.getElementById("ctaButton");
-
-      const whatsappUrl =
-        "https://wa.me/525581657250?text=Hola,%20quiero%20cotizar%20un%20evento";
-
-      function handleCTA() {
-        const width = window.innerWidth;
-
-        if (width >= 768 && width <= 1024) {
-          window.location.href = "#contacto";
-        } else {
-          window.location.href = whatsappUrl;
-        }
-      }
-
-      if (ctaButton) {
-        ctaButton.addEventListener("click", handleCTA);
-      }
-    });
-  </script>
-  <script>
-    detectSystemTheme();
-
-    const switchTheme = document.querySelector(
-      "[data-switch-theme]",
-    ) as HTMLButtonElement;
-    switchTheme.addEventListener("click", (e) => {
-      e.preventDefault();
-      changeThemeManually();
-    });
-
-    function changeThemeManually() {
-      const localAppTheme = localStorage.getItem("theme");
-      // Whenever the user explicitly chooses dark mode, previously it was light mode
-      if (localAppTheme === "light") {
-        changeThemeToDark();
-      }
-    }
-
-    function detectSystemTheme(manual = false) {
-      if (
-        localStorage.getItem("theme") === "dark" ||
-        (!("theme" in localStorage) &&
-          window.matchMedia("(prefers-color-scheme: dark)").matches)
-      ) {
-        document.documentElement.classList.add("dark");
-        if (manual) localStorage.setItem("theme", "dark");
-      } 
-    }
-
-    function changeThemeToDark() {
-      localStorage.setItem("theme", "dark");
-      document.documentElement.classList.add("dark");
-    }
-
-  </script>
-  <script>
-    const navbar = document.getElementById("navbar");
-
-    window.addEventListener("scroll", () => {
-      if (!navbar) return;
-
-      if (window.scrollY > 50) {
-        navbar.classList.add(
-          "bg-slate-950/90",
-          "backdrop-blur-md",
-          "shadow-lg",
-          "py-4",
-        );
-        navbar.classList.remove("py-6");
-      } else {
-        navbar.classList.remove(
-          "bg-slate-950/90",
-          "backdrop-blur-md",
-          "shadow-lg",
-          "py-4",
-        );
-        navbar.classList.add("py-6");
-      }
-    });
-  </script>
 </html>

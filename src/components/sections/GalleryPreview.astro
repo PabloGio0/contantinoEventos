@@ -1,0 +1,60 @@
+---
+// src/components/sections/GalleryPreview.astro
+// Muestra 3 fotos de preview y lleva a /galeria
+// Reemplaza los src por tus fotos reales de public/galeria/
+import Container from "../shared/Container.astro";
+
+const previews = [
+  { src: "/galery/foto-01.jpg", alt: "Iluminación profesional en evento" },
+  { src: "/galery/foto-02.jpg", alt: "Setup de audio y DJ" },
+  { src: "/galery/foto-03.jpg", alt: "Montaje de evento completo" },
+];
+---
+
+<section class="relative py-20 overflow-hidden bg-gradient-to-b from-black to-zinc-950">
+  <span class="w-72 h-72 rounded-full bg-amber-400/5 blur-3xl absolute left-1/2 -translate-x-1/2 top-0 pointer-events-none"></span>
+
+  <Container className="relative z-10">
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
+      <div>
+        <span class="inline-block px-4 py-2 rounded-full bg-amber-400/10 border border-amber-400/20 text-amber-400 text-sm font-medium mb-4">
+          Galería
+        </span>
+        <h2 class="text-3xl md:text-4xl font-semibold text-white">
+          Eventos que <span class="text-amber-400">hablan por sí solos</span>
+        </h2>
+      </div>
+      <a
+        href="/galeria"
+        class="flex-shrink-0 text-amber-400 hover:text-amber-300 transition-colors text-sm font-medium flex items-center gap-2 group"
+      >
+        Ver galería completa
+        <span class="group-hover:translate-x-1 transition-transform duration-300">→</span>
+      </a>
+    </div>
+
+    <!-- 3 fotos -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+      {previews.map((photo, i) => (
+        <a
+          href="/galeria"
+          class={`group relative overflow-hidden rounded-2xl block
+            ${i === 0 ? "sm:row-span-2 aspect-[3/4]" : "aspect-[4/3]"}`}
+        >
+          <img
+            src={photo.src}
+            alt={photo.alt}
+            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            loading="lazy"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent
+            opacity-0 group-hover:opacity-100 transition-opacity duration-300
+            flex items-end p-4">
+            <p class="text-white text-sm font-medium">{photo.alt}</p>
+          </div>
+        </a>
+      ))}
+    </div>
+  </Container>
+</section>

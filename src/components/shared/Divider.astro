@@ -1,0 +1,53 @@
+---
+// src/components/shared/Divider.astro
+// Separador sutil entre secciones
+// variant: "wave" | "line" | "dots"
+
+export interface Props {
+  variant?: "wave" | "line" | "dots";
+  flip?: boolean; // voltea la onda verticalmente
+}
+
+const { variant = "wave", flip = false } = Astro.props;
+---
+
+{variant === "wave" && (
+  <div class={`relative w-full overflow-hidden leading-none ${flip ? "rotate-180" : ""}`} style="height: 20px;">
+    <svg
+      viewBox="0 0 1440 40"
+      xmlns="http://www.w3.org/2000/svg"
+      preserveAspectRatio="none"
+      class="absolute inset-0 w-full h-full"
+    >
+      <path
+        d="M0,20 C240,40 480,0 720,20 C960,40 1200,0 1440,20 L1440,40 L0,40 Z"
+        fill="rgba(251,191,36,0.06)"
+      />
+      <path
+        d="M0,25 C360,5 720,35 1080,15 C1260,5 1380,20 1440,25"
+        fill="none"
+        stroke="rgba(251,191,36,0.12)"
+        stroke-width="1"
+      />
+    </svg>
+  </div>
+)}
+
+{variant === "line" && (
+  <div class="w-full px-5 sm:px-8 md:px-14 lg:px-5 max-w-7xl mx-auto">
+    <div class="relative h-px">
+      <!-- Línea base -->
+      <div class="absolute inset-0 bg-gradient-to-r from-transparent via-amber-400/20 to-transparent"></div>
+      <!-- Punto central brillante -->
+      <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-amber-400/40"></div>
+    </div>
+  </div>
+)}
+
+{variant === "dots" && (
+  <div class="flex items-center justify-center gap-2 py-2">
+    <span class="w-1 h-1 rounded-full bg-amber-400/20"></span>
+    <span class="w-1.5 h-1.5 rounded-full bg-amber-400/35"></span>
+    <span class="w-1 h-1 rounded-full bg-amber-400/20"></span>
+  </div>
+)}
