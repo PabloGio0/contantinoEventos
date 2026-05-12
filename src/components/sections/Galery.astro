@@ -6,20 +6,20 @@ import Container from "../shared/Container.astro";
 // type: "video" para MP4, omite el campo para imágenes
 // poster: imagen de preview para el video (recomendado)
 const media = [
-  { src: "/galery/foto-01.jpg", alt: "Iluminación en boda", w: 800, h: 1200 },
   {
-    src: "/galery/foto-02.png",
-    alt: "Setup de audio profesional",
-    w: 1200,
-    h: 800,
-  },
-  {
-    src: "/galery/mi-video.mp4",
+    src: "/galery/video-01.mp4",
     alt: "Highlight del evento",
     w: 900,
     h: 1600,
     type: "video",
-    poster: "/galery/foto-02.png",
+    poster: "/galery/portada-v02.jpg",
+  },
+  { src: "/galery/foto-01.jpg", alt: "Iluminación en boda", w: 800, h: 1200 },
+  {
+    src: "/galery/foto-02.jpeg",
+    alt: "Setup de audio profesional",
+    w: 1200,
+    h: 800,
   },
   {
     src: "/galery/foto-03.jpg",
@@ -33,7 +33,7 @@ const media = [
     w: 1200,
     h: 900,
   },
-  { src: "/galery/foto-05.jpg", alt: "Montaje de XV años", w: 800, h: 1100 },
+  { src: "/galery/foto-05.png", alt: "Montaje de XV años", w: 800, h: 1100 },
   {
     src: "/galery/foto-06.jpg",
     alt: "Cabezas móviles en acción",
@@ -43,8 +43,8 @@ const media = [
   { src: "/galery/foto-07.jpg", alt: "Decoración de mesas", w: 900, h: 1200 },
   { src: "/galery/foto-08.jpg", alt: "Evento al aire libre", w: 1200, h: 800 },
   {
-    src: "/galery/foto-09.jpg",
-    alt: "Equipo de sonido completo",
+    src: "/galery/foto-09.jpeg",
+    alt: "Equipo de audio completo",
     w: 800,
     h: 900,
   },
@@ -55,19 +55,66 @@ const media = [
     w: 800,
     h: 600,
   },
-  { src: "/galery/foto-12.jpg", alt: "Fiesta de graduación", w: 900, h: 1200 },
+  { src: "/galery/foto-12.jpeg", alt: "Fiesta de graduación", w: 900, h: 1200 },
+  { src: "/galery/foto-13.jpg", alt: "Fiesta de graduación", w: 900, h: 1200 },
+  {
+    src: "/galery/video-02.mp4",
+    alt: "Highlight del evento",
+    w: 900,
+    h: 1600,
+    type: "video",
+    poster: "/galery/portada-v01.jpeg",
+  },
+  {
+    src: "/galery/video-03.mp4",
+    alt: "Montaje XV años",
+    w: 900,
+    h: 1600,
+    type: "video",
+    poster: "/galery/portada-v003.jpeg",
+  },
+  {
+    src: "/galery/video-04.mp4",
+    alt: "Montaje audio completo",
+    w: 900,
+    h: 1100,
+    type: "video",
+    poster : "/galery/portada-v04.jpeg",
+  },
+  {
+    src: "/galery/video-07.mp4",
+    alt: "Inicio de evento",
+    w: 900,
+    h: 1100,
+    type: "video",
+  },
+  {
+    src: "/galery/video-06.mp4",
+    alt: "Audio e Iluminación en teatro",
+    w: 900,
+    h: 1100,
+    type: "video",
+  },
+  {
+    src: "/galery/video-05.mp4",
+    alt: "Batucada",
+    w: 900,
+    h: 1100,
+    type: "video",
+    poster: "/galery/portada-v03.jpg",
+  },
 ];
 ---
 
 <main class="min-h-screen bg-black overflow-hidden">
   <!-- HERO -->
-  <section class="relative pt-36 pb-16 overflow-hidden">
+  <section class="relative pt-24 pb-16 overflow-hidden">
     <div
       class="absolute inset-0 bg-gradient-to-b from-black via-zinc-950 to-black"
     >
     </div>
     <div
-      class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-amber-400/8 rounded-full blur-3xl pointer-events-none"
+      class="absolute top-0 left-1/2 -translate-x-1/2 w-[min(600px,100vw)] h-[300px] bg-amber-400/8 rounded-full blur-3xl pointer-events-none"
     >
     </div>
     <div
@@ -90,7 +137,7 @@ const media = [
         Más de 10 años creando experiencias únicas en CDMX. Cada foto cuenta una
         historia de producción impecable.
       </p>
-      <div class="flex justify-center gap-12 mt-10">
+      <div class="flex justify-center gap-4 sm:gap-12 mt-10">
         <div>
           <p class="text-3xl font-semibold text-amber-400">+100</p>
           <p class="text-zinc-500 text-sm mt-1">Eventos realizados</p>

@@ -1,193 +1,217 @@
 ---
-import Container from "../components/shared/Container.astro";
 import monograma from "../assets/logos/monograma.svg";
 
-const WA_URL = "https://wa.me/525581657250?text=Hola,%20quiero%20cotizar%20un%20evento";
-
+const WA_URL =
+  "https://wa.me/525581657250?text=Hola,%20quiero%20cotizar%20un%20evento";
 
 const navItems = [
-  {
-    href: "/",
-    text: "Inicio",
-  },
-  {
-    href: "/servicios",
-    text: "Servicios",
-  },
-  {
-    href: "/paquetes",
-    text: "Paquetes",
-  },
-  {
-    href: "/galeria",
-    text: "Galería",
-  },
-  {
-    href: "/contacto",
-    text: "Contacto",
-  },
+  { href: "/", text: "Inicio" },
+  { href: "/servicios", text: "Servicios" },
+  { href: "/paquetes", text: "Paquetes" },
+  { href: "/galeria", text: "Galería" },
+  { href: "/contacto", text: "Contacto" },
 ];
 ---
 
 <header
   id="navbar"
-  class="fixed inset-x-0 top-0 z-50 transition-all duration-500 py-6 lg:py-8"
+  class="fixed inset-x-0 top-0 z-50 py-4 w-screen overflow-hidden bg-transparent"
+  style="transition: background-color 0.5s, border-color 0.5s, padding 0.5s;"
 >
-  <Container>
-    <nav class="w-full flex items-center justify-between relative">
-      <!-- LOGO MEJORADO -->
-      <a href="/" class="flex items-center gap-3 group">
+  <!-- Un solo wrapper, sin Container -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <nav class="w-full flex items-center justify-between">
+      <!-- LOGO -->
+      <a href="/" class="flex items-center gap-3 group flex-shrink-0">
         <div class="relative">
           <img
             src={monograma.src}
             alt="Monograma Constantino"
             class="w-9 h-9 object-contain relative z-10 group-hover:scale-110 transition-transform duration-300"
           />
-          <!-- Efecto de brillo ámbar detrás del logo -->
-          <div class="absolute inset-0 bg-amber-400/20 rounded-full blur-md group-hover:bg-amber-400/30 transition-all duration-300"></div>
+          <div
+            class="absolute inset-0 bg-amber-400/20 rounded-full blur-md group-hover:bg-amber-400/30 transition-all duration-300"
+          >
+          </div>
         </div>
-
         <div class="flex flex-col">
-          <span class="text-lg font-semibold text-white leading-tight">
-            Constantino
-          </span>
-          <span class="text-xs text-amber-400/80 font-medium tracking-wider">
-            Eventos & Producciones
-          </span>
+          <span class="text-lg font-semibold text-white leading-tight"
+            >Constantino</span
+          >
+          <span class="text-xs text-amber-400/80 font-medium tracking-wider"
+            >Eventos & Producciones</span
+          >
         </div>
       </a>
 
-      <!-- BOTÓN HAMBURGUESA MEJORADO -->
+      <!-- LINKS DESKTOP — centrados -->
+      <ul class="hidden lg:flex items-center gap-1 xl:gap-2 mx-auto">
+        {
+          navItems.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                class="px-4 py-2 rounded-full text-zinc-300 hover:text-amber-400
+                hover:bg-amber-400/10 transition-all duration-300 font-medium text-sm"
+              >
+                {item.text}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+
+      <!-- CTA DESKTOP -->
+      <a
+        href={WA_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="hidden lg:flex items-center gap-2 px-5 py-2.5 rounded-full font-medium flex-shrink-0
+          text-zinc-300 border border-white
+          hover:bg-amber-400 hover:border-amber-400 hover:text-black
+          transition-all duration-300 text-sm"
+      >
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+          <path
+            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
+          ></path>
+        </svg>
+        Cotizar Mi Evento
+      </a>
+
+      <!-- BOTÓN HAMBURGUESA — solo móvil -->
       <button
         id="menu-toggle"
-        class="lg:hidden w-10 h-10 rounded-full bg-amber-400/10 border border-amber-400/30 flex items-center justify-center text-amber-400 hover:bg-amber-400 hover:text-black transition-all duration-300"
+        class="lg:hidden w-10 h-10 rounded-full bg-amber-400/10 border border-amber-400/30
+          flex items-center justify-center text-amber-400
+          hover:bg-amber-400 hover:text-black transition-all duration-300 flex-shrink-0"
         aria-label="Abrir menú"
       >
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        <svg
+          class="w-5 h-5"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"></path>
         </svg>
       </button>
+    </nav>
+  </div>
 
-      <!-- MENÚ MÓVIL MEJORADO -->
-      <ul
-        id="mobile-menu"
-        class="hidden lg:flex flex-col lg:flex-row gap-2 lg:gap-1 xl:gap-2
-          absolute lg:static top-full left-0 right-0 w-full lg:w-auto
-          bg-zinc-950/95 lg:bg-transparent
-          backdrop-blur-lg lg:backdrop-blur-none
-          border border-amber-400/20 lg:border-0
-          rounded-2xl lg:rounded-none
-          p-4 lg:p-0
-          items-center
-          lg:mx-auto
-          shadow-2xl lg:shadow-none
-          mt-2 lg:mt-0"
+  <!-- MENÚ MÓVIL — fuera del nav para que no lo clip ningún overflow -->
+  <div
+    id="mobile-menu"
+    class="lg:hidden overflow-hidden transition-all duration-300 ease-in-out"
+    style="max-height: 0px;"
+  >
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 pt-2 pb-4">
+      <div
+        class="bg-zinc-950/98 border border-amber-400/20 rounded-2xl p-4 shadow-2xl backdrop-blur-lg"
       >
-        {navItems.map((item) => (
-          <li class="w-full lg:w-auto">
-            <a
-              href={item.href}
-              class="block w-full lg:w-auto px-4 py-3 lg:py-2 rounded-xl lg:rounded-full
-                text-zinc-300 hover:text-amber-400
-                hover:bg-amber-400/10 lg:hover:bg-transparent
-                transition-all duration-300
-                text-center lg:text-left
-                font-medium"
-            >
-              {item.text}
-            </a>
-          </li>
-        ))}
+        <ul class="flex flex-col gap-1">
+          {
+            navItems.map((item) => (
+              <li>
+                <a
+                  href={item.href}
+                  class="block w-full px-4 py-3 rounded-xl text-center
+                  text-zinc-300 hover:text-amber-400 hover:bg-amber-400/10
+                  transition-all duration-300 font-medium"
+                >
+                  {item.text}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
 
-        <!-- CTA EN MÓVIL -->
-        <li class="w-full lg:hidden mt-2 pt-2 border-t border-amber-400/20">
+        <!-- CTA móvil -->
+        <div class="mt-3 pt-3 border-t border-amber-400/20">
           <a
             href={WA_URL}
             target="_blank"
             rel="noopener noreferrer"
             class="flex items-center justify-center gap-2 w-full px-4 py-3 rounded-xl
-              bg-gradient-to-r from-amber-400 to-amber-500
-              text-black font-semibold
-              hover:from-amber-500 hover:to-amber-600
-              transition-all duration-300"
+              bg-gradient-to-r from-amber-400 to-amber-500 text-black font-semibold
+              hover:from-amber-500 hover:to-amber-600 transition-all duration-300"
           >
             <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+              <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
+              ></path>
             </svg>
             Cotizar Mi Evento
           </a>
-        </li>
-      </ul>
-
-      <!-- CTA EN DESKTOP MEJORADO -->
-      <div class="hidden lg:block">
-        <a
-          href={WA_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-          class="flex items-center justify-center gap-2 w-full px-4 py-3 rounded-full font-medium overflow-hidden transition-all duration-500
-            text-zinc-300 border border-white hover hover:bg-amber-400/90 hover:border-black hover:text-black"
-        >
-        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-            </svg>
-            Cotizar Mi Evento
-        </a>
+        </div>
       </div>
-    </nav>
-  </Container>
-
-  <script>
-    const toggle = document.getElementById("menu-toggle");
-    const menu = document.getElementById("mobile-menu");
-
-    toggle?.addEventListener("click", () => {
-      menu?.classList.toggle("hidden");
-      
-      // Animación del botón hamburguesa
-      if (!menu?.classList.contains("hidden")) {
-        // Menú abierto
-        toggle.classList.add("bg-amber-400", "text-black");
-        toggle.classList.remove("bg-amber-400/10", "text-amber-400");
-      } else {
-        // Menú cerrado
-        toggle.classList.remove("bg-amber-400", "text-black");
-        toggle.classList.add("bg-amber-400/10", "text-amber-400");
-      }
-    });
-
-    // Cerrar menú al hacer clic en un enlace
-    menu?.querySelectorAll("a").forEach(link => {
-      link.addEventListener("click", () => {
-        if (window.innerWidth < 1024) {
-          menu.classList.add("hidden");
-          toggle?.classList.remove("bg-amber-400", "text-black");
-          toggle?.classList.add("bg-amber-400/10", "text-amber-400");
-        }
-      });
-    });
-
-    // Cambios en el scroll - Versión corregida
-    const navbar = document.getElementById("navbar");
-    
-    function updateNavbarStyle() {
-      if (!navbar) return;
-
-      if (window.scrollY > 50) {
-        // Con scroll - sólido
-        navbar.classList.add("bg--transparent-black/80", "backdrop-blur-md", "border-b", "border-amber-400/20", "py-3", "lg:py-4");
-        navbar.classList.remove("backdrop-blur-none", "border-transparent", "py-6", "lg:py-8");
-      } else {
-        // Sin scroll - transparente
-        navbar.classList.add("bg-transparent", "backdrop-blur-none", "border-transparent", "py-6", "lg:py-8");
-        navbar.classList.remove("bg-black/80", "backdrop-blur-md", "border-b", "border-amber-400/30", "py-3", "lg:py-4");
-      }
-    }
-
-    // Ejecutar al cargar la página
-    updateNavbarStyle();
-
-    // Ejecutar en cada scroll
-    window.addEventListener("scroll", updateNavbarStyle);
-  </script>
+    </div>
+  </div>
 </header>
+
+<script>
+  const toggle = document.getElementById("menu-toggle");
+  const menu = document.getElementById("mobile-menu");
+  const navbar = document.getElementById("navbar");
+  let isOpen = false;
+
+  function openMenu() {
+    if (!menu) return;
+    // Calcular altura real del contenido
+    menu.style.maxHeight = menu.scrollHeight + "px";
+    isOpen = true;
+    toggle?.classList.add("bg-amber-400", "text-black");
+    toggle?.classList.remove("bg-amber-400/10", "text-amber-400");
+  }
+
+  function closeMenu() {
+    if (!menu) return;
+    menu.style.maxHeight = "0px";
+    isOpen = false;
+    toggle?.classList.remove("bg-amber-400", "text-black");
+    toggle?.classList.add("bg-amber-400/10", "text-amber-400");
+  }
+
+  toggle?.addEventListener("click", () => {
+    isOpen ? closeMenu() : openMenu();
+  });
+
+  // Cerrar al hacer clic en un link
+  menu?.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", closeMenu);
+  });
+
+  // Cerrar al hacer clic fuera
+  document.addEventListener("click", (e) => {
+    if (isOpen && !navbar?.contains(e.target as Node)) {
+      closeMenu();
+    }
+  });
+
+  // Scroll
+  function updateNavbarStyle() {
+    if (!navbar) return;
+    if (window.scrollY > 50) {
+      navbar.classList.add(
+        "bg-black/80",
+        "backdrop-blur-md",
+        "border-b",
+        "border-amber-400/20",
+      );
+    } else {
+      navbar.classList.remove(
+        "bg-black/80",
+        "backdrop-blur-md",
+        "border-b",
+        "border-amber-400/20",
+      );
+    }
+  }
+
+  updateNavbarStyle();
+  window.addEventListener("scroll", updateNavbarStyle);
+</script>

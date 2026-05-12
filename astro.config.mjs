@@ -7,4 +7,7 @@ export default defineConfig({
   integrations: [tailwind()],
   site: "https://agency-template.vbartalis.dev",
   base: "",
+  server: {
+    host: true
+  }
 });
